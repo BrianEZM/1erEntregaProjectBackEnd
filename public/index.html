@@ -5,32 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
-    <script src="/socket.io/socket.io.js"></script>
 </head>
-
 <body>
-    <h1>DESADIO CODERHOUSE - SERVER - MOTORES DE PLANTILLAS</h1>
+    <h1>PRUEBA 1 - SERVER >> ROUTER >> STATIC</h1>
     <h2>Ingresar producto</h2>
-    <form action="/api/productos/guardar" method="post">
+    <form action="/api/productos" method="post">
         Producto: <input type="text" name="producto">
         Precio: <input type="text" name="precio">
         ImagURL: <input type="text" name="imag">
         <button>Enviar datos</button>
     </form>
-    <br>
-    <a href="/api/productos/listar" type="button" class="btn btn-primary">Ver productos</button>
-        <br>
-        <br>
-        <br>
-    
-    <div id="messages"></div>
-        <form class="form-inline" onsubmit="return addMessage(this)" autocomplete="off">
-          <input type="text" id="username" class="form-control my-2 mr-2" placeholder="Tu Nombre">
-          <input type="text" id="texto" class="form-control my-2 mr-2" placeholder="Cuéntanos algo...">
-          <input class="btn btn-primary my-2" type="submit" value="Enviar!">
-        </form>
-    </div>
-      
-    <script src="js/main.js"></script>
 </body>
 </html>

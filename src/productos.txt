@@ -1,0 +1,1 @@
+[{"nombre":"PALA 1","descripcion":"descripcion 1","codigo":"1","imag":"https://http2.mlstatic.com/D_NQ_NP_868903-MLA31035689818_062019-O.webp","precio":11000,"stock":100,"id":1,"timestamp":"2022-07-25T16:56:08.580Z"}]
