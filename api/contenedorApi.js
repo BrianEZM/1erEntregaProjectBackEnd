@@ -53,7 +53,7 @@ class ContenedorApiRouter {
     async getAll(){
         try {
             let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8")
-            let prods = await JSON.parse(lectura)
+            let prods = await JSON.parse(lectura);
             return prods;
             }
         catch(err){console.log("ERROR 1 - LECTURA DE FILE GET-ALL");}

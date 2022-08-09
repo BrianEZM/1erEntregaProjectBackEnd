@@ -1,0 +1,30 @@
+<% if (prods.length > 0 ) { %>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Imagen</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+          </tr>
+    <% prods.forEach(function(prod) { %>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td><%= prod.nombre %></td>
+            <td><%= prod.descripcion %></td>
+            <td><%= prod.codigo %></td>
+            <td> <img src="<%= prod.imag %>" alt="imagen"> </td>
+            <td><%= prod.precio %></td>
+            <td><%= prod.stock %></td>
+          </tr>
+        </tbody>
+    <% }) %>
+<% } else { %>
+    <h3 class="alert alert-warning">No se encontraron productos</h3>
+<% } %>
+</table>
