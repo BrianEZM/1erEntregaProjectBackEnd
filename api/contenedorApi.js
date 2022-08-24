@@ -38,17 +38,17 @@ class ContenedorApiRouter {
         }
     }
 
-    // async getById(id){
-    //     try {
-    //         let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8")
-    //         let prods = JSON.parse(lectura)
-    //         let prodFind = prods.find(prod => prod.id == id)
-    //         if(prodFind){
-    //             console.log(prodFind)
-    //         }else{console.log(null)}
-    //         }
-    //     catch(err){console.log("ERROR 1 - LECTURA DE FILE BY ID");}
-    // }
+    async getById(id){
+        try {
+            let lectura = await fs.promises.readFile(`./src/${this.fileName}`, "utf-8")
+            let prods = JSON.parse(lectura)
+            let prodFind = prods.find(prod => prod.id == id)
+            if(prodFind){
+                return prodFind
+            }else{return console.log("Producto no encontrado")}
+            }
+        catch(err){console.log("ERROR 1 - LECTURA DE FILE BY ID");}
+    }
 
     async getAll(){
         try {

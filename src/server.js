@@ -1,15 +1,15 @@
 const express = require ('express')
-const { Server: HttpServer } = require("http");
-const { Server: IOServer } = require("socket.io");
+// const { Server: HttpServer } = require("http");
+// const { Server: IOServer } = require("socket.io");
 const { Router } = require('express');
 const fs = require("fs");
 
 const app = express();
-const httpServer = new HttpServer(app);
-const io = new IOServer(httpServer);
+// const httpServer = new HttpServer(app);
+// const io = new IOServer(httpServer);
 
-app.set("views", "./views")
-app.set("view engine", "ejs")
+// app.set("views", "./views")
+// app.set("view engine", "ejs")
 
 let today = new Date()
 
@@ -25,8 +25,8 @@ app.use(express.static('public'))
 
 const ContenedorApiRouter = require('../api/contenedorApi.js')
 const archivoApiRouter = new ContenedorApiRouter("productos.txt")
-const ContenedorMsjs = require('../api/contenedorMsjs.js')
-const msjs = new ContenedorMsjs("msjs.txt")
+// const ContenedorMsjs = require('../api/contenedorMsjs.js')
+// const msjs = new ContenedorMsjs("msjs.txt")
 
 const routerProductos = Router()
 
@@ -35,38 +35,42 @@ routerProductos.use(express.json())
 routerProductos.use(express.urlencoded({extended: true}))
 
 // <------------------------- Sockets ------------------------->
-io.on("connection", async socket => {
+// io.on("connection", async socket => {
 
-    console.log("Un cliente se ha conectado");
-    socket.emit("products", await archivoApiRouter.getAll())
+//     console.log("Un cliente se ha conectado");
+//     socket.emit("products", await archivoApiRouter.getAll())
   
-    socket.on("update", async producto => {
-        archivoApiRouter.save(producto);
-        io.sockets.emit("products", await archivoApiRouter.getAll());
-    })
+//     socket.on("update", async producto => {
+//         archivoApiRouter.save(producto);
+//         io.sockets.emit("products", await archivoApiRouter.getAll());
+//     })
 
-    // carga inicial de mensajes
-    socket.emit('messages', await msjs.getAll());
+//     // carga inicial de mensajes
+//     socket.emit('messages', await msjs.getAll());
 
-    // actualizacion de mensajes
-    socket.on("new-message", async data => {
-        await msjs.save(data)
-        io.sockets.emit("messages", await msjs.getAll());
-        })
-  });
+//     // actualizacion de mensajes
+//     socket.on("new-message", async data => {
+//         await msjs.save(data)
+//         io.sockets.emit("messages", await msjs.getAll());
+//         })
+//   });
 
 // RUTAS DE PRODUCTOS
-routerProductos.get('/:id?', async (req, res) => {
+
+
+routerProductos.get('/', async (req, res) => {
     const id = Number(req.params.id)
 
     let lectura = await fs.promises.readFile("./src/productos.txt", "utf-8")
     let prods = JSON.parse(lectura)
+
+	res.json(prods);
     
     // const filtered = prods.find(prod => prod.id == id)
     // if (filtered){
     //     res.render("pages/index",{filtered})
     // } else {
-    res.render("pages/index",{prods})
+    // res.render("pages/index",{prods})
     
     // CORREGIR RENDERIZADO TERNARIO POR ID
 })
@@ -196,9 +200,9 @@ routerProductos.delete('/:id', validarAdmin, async (req, res) => {
 
 // ----------- SERVER
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080;
 
-const server = httpServer.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${server.address().port}`)
-})
-server.on('error', error => console.log(`Error en servidor ${error}`));
+const server = app.listen(PORT, () => {
+	console.log(`Servidor HTTP escuchando en el puerto ${server.address().port}`);
+});
+server.on("error", (error) => console.log(`Error en servidor ${error}`));
